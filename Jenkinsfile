@@ -1,6 +1,11 @@
 pipeline {
   agent any
 
+  environment {
+      DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+      DOCKER_IMAGE = 'ramiroaguero/pin1v2:latest'
+  }
+
   options {
     timeout(time: 2, unit: 'MINUTES')
   }
@@ -24,10 +29,13 @@ pipeline {
       }
     }
    stage('Deploy Image') {
-      steps{
-        sh '''
-        docker tag testapp 127.0.0.1:5000/mguazzardo/testapp
-        docker push 127.0.0.1:5000/mguazzardo/testapp   
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+            sh '''
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker tag testapp ramiroaguero/pin1v2:latest
+            docker push ramiroaguero/pin1v2:latest
+            
         '''
         }
       }
