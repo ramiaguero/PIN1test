@@ -7,9 +7,10 @@ phases:
       - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 037380703489.dkr.ecr.us-east-2.amazonaws.com
       - echo Creando ECR repository ...
       - aws ecr describe-repositories --repository-names my-docker-app || aws ecr create-repository --repository-name my-docker-app
-      - TAG=$(date +%Y%m%d%H%M%S)  # Generate timestamp-based tag
+      - TAG="$(date +%Y%m%d%H%M%S)"  
   build:
     commands:
+      - set -e  #corte en cualquier falla
       - echo Build del dia `date`
       - echo Building Docker image...
       - docker build -t my-docker-app:$TAG .
@@ -17,6 +18,7 @@ phases:
       - docker tag my-docker-app:$TAG 037380703489.dkr.ecr.us-east-2.amazonaws.com/my-docker-app:latest
   post_build:
     commands:
-      - echo Pushing the Docker image to ECR...
+      - echo Pushing Docker image to ECR...
       - docker push 037380703489.dkr.ecr.us-east-2.amazonaws.com/my-docker-app:$TAG
       - docker push 037380703489.dkr.ecr.us-east-2.amazonaws.com/my-docker-app:latest
+
