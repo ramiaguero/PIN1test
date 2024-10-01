@@ -21,4 +21,3 @@ phases:
       - echo Pushing Docker image to ECR...
       - docker push 253490770873.dkr.ecr.us-east-2.amazonaws.com/ra-docker-app:$TAG
       - docker push 253490770873.dkr.ecr.us-east-2.amazonaws.com/ra-docker-app:latest
-
