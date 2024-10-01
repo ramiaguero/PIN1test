@@ -1,12 +1,7 @@
-FROM node:11.1.0-alpine
+FROM nginx:latest
 
-WORKDIR /app
 
-ADD package.json package-lock.json /app/
-RUN npm install
+EXPOSE 80
 
-EXPOSE 3000
 
-ADD . /app
-
-CMD ["node", "index"]
+CMD ["nginx", "-g", "daemon off;"]
