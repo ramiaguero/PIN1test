@@ -14,8 +14,8 @@ phases:
       - echo Build del dia `date`
       - echo Building Docker image...
       - docker build -t ra-docker-app:$TAG .
-      - docker tag ra-docker-app:$TAG 253490770873.dkr.ecr.us-east-2.amazonaws.com/my-docker-app:$TAG
-      - docker tag ra-docker-app:$TAG 253490770873.dkr.ecr.us-east-2.amazonaws.com/my-docker-app:latest
+      - docker tag ra-docker-app:$TAG 253490770873.dkr.ecr.us-east-2.amazonaws.com/ra-docker-app:$TAG
+      - docker tag ra-docker-app:$TAG 253490770873.dkr.ecr.us-east-2.amazonaws.com/ra-docker-app:latest
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
