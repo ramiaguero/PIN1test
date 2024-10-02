@@ -13,8 +13,8 @@ phases:
       - set -e  #corte en cualquier falla
       - echo Build del dia `date`
       - echo Building Docker image...
-      - docker build -t ra-docker-app:$TAG .
-      - docker tag ra-docker-app:$TAG 253490770873.dkr.ecr.us-east-2.amazonaws.com/ra-docker-app:$TAG
+      - docker build -t ra-docker-app .
+      - docker tag ra-docker-app:latest 253490770873.dkr.ecr.us-east-2.amazonaws.com/ra-docker-app:$TAG
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
