@@ -1,5 +1,4 @@
 <?php
-
 // Get the hostname from the environment variable
 $hostname = gethostname();
 
