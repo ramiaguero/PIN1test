@@ -4,4 +4,5 @@ $hostname = gethostname();
 
 // Output a greeting message
 echo "Hello from webserver#" . $hostname;
+echo "powered by teracloud";
 ?>

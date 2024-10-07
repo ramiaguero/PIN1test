@@ -8,7 +8,7 @@ phases:
       - TAG="$(date +%Y%m%d%H%M%S)"  
   build:
     commands:
-      - set -e  # corte si falla algo
+      - set -e  # Exit if any command fails
       - echo Build of the day `date`
       - echo Building Docker image...
       - docker build -t $REPO_NAME .
@@ -20,7 +20,8 @@ phases:
       - docker push $AWS_ECR_ID/$REPO_NAME:$TAG
       - docker push $AWS_ECR_ID/$REPO_NAME:latest
       - echo Writing image definition file for ECS deployment...
-      - printf '[{"name":"ra-container","imageUri":"%s"}]' $REPO_NAME/$REPO_NAME:${TAG} > imagedefinitions.json
+      - printf '[{"name":"ra-container","imageUri":"%s"}]' $AWS_ECR_ID/$REPO_NAME:$TAG > imagedefinitions.json
+
 artifacts:
   files:
     - imagedefinitions.json
