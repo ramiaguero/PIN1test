@@ -3,18 +3,19 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Loggeando a ECR...
+      - echo Logging into ECR...
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ECR_ID
       - TAG="$(date +%Y%m%d%H%M%S)"  
   build:
     commands:
-      - set -e  #corte en cualquier falla
-      - echo Build del dia `date`
+      - set -e  # corte si falla algo
+      - echo Build of the day `date`
       - echo Building Docker image...
       - docker build -t $REPO_NAME .
       - docker tag $REPO_NAME:latest $AWS_ECR_ID/$REPO_NAME:$TAG
-
+      - docker tag $REPO_NAME:latest $AWS_ECR_ID/$REPO_NAME:latest
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
       - docker push $AWS_ECR_ID/$REPO_NAME:$TAG
+      - docker push $AWS_ECR_ID/$REPO_NAME:latest
