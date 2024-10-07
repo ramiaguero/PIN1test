@@ -5,6 +5,7 @@ phases:
     commands:
       - echo Loggeando a ECR...
       - aws ecr get-login-password --$AWS_REGION | docker login --username AWS --password-stdin $AWS_ECR_ID
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ECR_ID
       - TAG="$(date +%Y%m%d%H%M%S)"  
   build:
     commands:
