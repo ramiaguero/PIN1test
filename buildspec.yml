@@ -4,18 +4,16 @@ phases:
   pre_build:
     commands:
       - echo Loggeando a ECR...
-      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 253490770873.dkr.ecr.us-east-2.amazonaws.com
-      - echo Creando ECR repository ...
-      - aws ecr describe-repositories --repository-names ra-docker-app || aws ecr create-repository --repository-name ra-docker-app
+      - aws ecr get-login-password --$AWS_REGION | docker login --username AWS --password-stdin $AWS_ECR_ID
       - TAG="$(date +%Y%m%d%H%M%S)"  
   build:
     commands:
       - set -e  #corte en cualquier falla
       - echo Build del dia `date`
       - echo Building Docker image...
-      - docker build -t ra-docker-app .
-      - docker tag ra-docker-app:latest 253490770873.dkr.ecr.us-east-2.amazonaws.com/ra-docker-app:$TAG
+      - docker build -t $REPO_NAME .
+      - docker tag --force $REPO_NAME:latest $AWS_ECR_ID/$REPO_NAME:$TAG
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
-      - docker push 253490770873.dkr.ecr.us-east-2.amazonaws.com/ra-docker-app:$TAG
+      - docker push $AWS_ECR_ID/$REPO_NAME:$TAG
