@@ -20,7 +20,7 @@ phases:
       - docker push $AWS_ECR_ID/$REPO_NAME:$TAG
       - docker push $AWS_ECR_ID/$REPO_NAME:latest
       - echo Writing image definition file for ECS deployment...
-      - printf '[{"name":"ag-php","imageUri":"%s"}]' $REPO_NAME/$REPO_NAME:${TAG} > imagedefinitions.json
+      - printf '[{"name":"ra-container","imageUri":"%s"}]' $REPO_NAME/$REPO_NAME:${TAG} > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
