@@ -12,7 +12,8 @@ phases:
       - echo Build del dia `date`
       - echo Building Docker image...
       - docker build -t $REPO_NAME .
-      - docker tag --force $REPO_NAME:latest $AWS_ECR_ID/$REPO_NAME:$TAG
+      - docker tag $REPO_NAME:latest $AWS_ECR_ID/$REPO_NAME:$TAG
+
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
