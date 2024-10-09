@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECS Container Dashboard</title>
+    <title>ECS Instance Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -35,7 +35,7 @@
             margin: 0;
             color: #fff;
         }
-        .container-info {
+        .instance-info {
             font-size: 1.2rem;
             padding: 20px;
             background-color: #2980b9;
@@ -73,12 +73,12 @@
 <body>
     <div class="dashboard">
         <header>
-            <h1>ECS Container Dashboard</h1>
+            <h1>ECS Instance Dashboard</h1>
         </header>
-        <div class="container-info">
+        <div class="instance-info">
             <?php
             $hostname = gethostname();
-            echo "Container ID: " . htmlspecialchars($hostname);
+            echo "Instance ID: " . htmlspecialchars($hostname);
             ?>
         </div>
         <div class="details">
@@ -87,7 +87,7 @@
                 <p><?php echo phpversion(); ?></p>
             </div>
             <div class="detail-item">
-                <h3>Container IP</h3>
+                <h3>Instance IP</h3>
                 <p><?php echo $_SERVER['SERVER_ADDR']; ?></p>
             </div>
             <div class="detail-item">
@@ -101,10 +101,6 @@
             <div class="detail-item">
                 <h3>ECS Cluster</h3>
                 <p><?php echo getenv('ECS_CLUSTER') ?: 'Not Available'; ?></p>
-            </div>
-            <div class="detail-item">
-                <h3>AWS Region</h3>
-                <p><?php echo getenv('AWS_REGION') ?: 'Not Available'; ?></p>
             </div>
         </div>
         <footer>

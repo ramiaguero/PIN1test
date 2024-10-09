@@ -8,7 +8,7 @@ phases:
       - TAG="$(date +%Y%m%d%H%M%S)"  
   build:
     commands:
-      - set -e  # Exit if any command fails
+      - set -e  # Exit at command fail
       - echo Build of the day `date`
       - echo Building Docker image...
       - docker build -t $REPO_NAME .
