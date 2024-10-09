@@ -87,20 +87,12 @@
                 <p><?php echo phpversion(); ?></p>
             </div>
             <div class="detail-item">
-                <h3>Instance IP</h3>
-                <p><?php echo $_SERVER['SERVER_ADDR']; ?></p>
-            </div>
-            <div class="detail-item">
                 <h3>Current Time</h3>
                 <p><?php echo date('Y-m-d H:i:s'); ?></p>
             </div>
             <div class="detail-item">
-                <h3>Task Definition</h3>
-                <p><?php echo getenv('TASK_DEFINITION') ?: 'ra-task-definition-lab2'; ?></p>
-            </div>
-            <div class="detail-item">
                 <h3>ECS Cluster</h3>
-                <p><?php echo getenv('ECS_CLUSTER') ?: 'ra-ecs-lab2'; ?></p>
+                <p><?php echo getenv('ECS_CLUSTER') ?: 'Not Available'; ?></p>
             </div>
         </div>
         <footer>
