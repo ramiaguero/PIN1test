@@ -92,7 +92,7 @@
             </div>
             <div class="detail-item">
                 <h3>ECS Cluster</h3>
-                <p><?php echo getenv('ECS_CLUSTER') ?: 'Not Available'; ?></p>
+                <p><?php echo getenv('ECS_CLUSTER') ?: 'ra-ecs-lab2'; ?></p>
             </div>
         </div>
         <footer>
